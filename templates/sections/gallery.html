@@ -1,0 +1,51 @@
+{% load ui %}
+<section class="gallery" id="gallery">
+    <div class="gallery__container">
+        {% if gallery.eyebrow %}<p class="eyebrow">{{ gallery.eyebrow }}</p>{% endif %}
+        <h2 class="gallery__title">{{ gallery.title|linebreaksbr }}</h2>
+        {% if gallery.description %}<p class="gallery__text">{{ gallery.description }}</p>{% endif %}
+
+        {% if gallery.show_filters %}
+        <div class="gallery__filters" role="group" aria-label="Filter photos">
+            <button class="gallery__filter is-active" type="button" data-filter="all" aria-pressed="true">{{ gallery.all_filter_label|default:"All" }}</button>
+            {% for category in gallery_categories %}
+            <button class="gallery__filter" type="button" data-filter="{{ category.slug }}" aria-pressed="false">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if gallery_images %}
+        <div class="gallery__grid">
+            {% for photo in gallery_images %}
+            <figure class="gallery__item gallery__item--{{ photo.size }}" data-category="{{ photo.category.slug|default:'none' }}">
+                <button class="gallery__open" type="button"
+                        data-src="{% if photo.image %}{{ photo.image.url }}{% endif %}"
+                        data-title="{{ photo.title }}" data-label="{{ photo.category.name|default:'' }}"
+                        data-description="{{ photo.description }}" aria-label="Open photo: {{ photo.title }}">
+                    {% if photo.image %}
+                    <img src="{{ photo.image.url }}" alt="{{ photo.alt_text }}" loading="lazy">
+                    {% endif %}
+                </button>
+                <figcaption class="gallery__caption">
+                    {% if photo.category %}<span class="gallery__label">{{ photo.category.name }}</span>{% endif %}
+                    <span class="gallery__name">{{ photo.title }}</span>
+                </figcaption>
+            </figure>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    {# Full-size viewer (opened by main.js) #}
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+        <button class="lightbox__close" type="button" aria-label="Close">{% icon 'x' size=28 %}</button>
+        <figure class="lightbox__figure">
+            <img class="lightbox__img" src="" alt="">
+            <figcaption class="lightbox__caption">
+                <span class="gallery__label lightbox__label"></span>
+                <span class="lightbox__title"></span>
+                <span class="lightbox__text"></span>
+            </figcaption>
+        </figure>
+    </div>
+</section>

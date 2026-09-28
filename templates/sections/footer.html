@@ -1,0 +1,76 @@
+<footer class="footer">
+    <div class="footer__container">
+        <div class="footer__grid">
+            {# Brand + about + contact #}
+            <div class="footer__brand-col">
+                <a class="footer__brand" href="#home">
+                    {% if footer_logo %}<img class="footer__logo" src="{{ footer_logo.url }}" alt="{{ footer_name }} logo" width="72" height="77" loading="lazy">{% endif %}
+                    <span>
+                        <span class="footer__name">{{ footer_name }}</span>
+                        {% if footer.tagline %}<span class="footer__tagline">{{ footer.tagline }}</span>{% endif %}
+                    </span>
+                </a>
+                {% if footer.about_text %}<p class="footer__about">{{ footer.about_text }}</p>{% endif %}
+                {% if footer.show_contact_details %}
+                <ul class="footer__contact">
+                    {% if site.address %}<li>{{ footer.address_label }} {{ site.address }}</li>{% endif %}
+                    {% if site.phone %}<li>{{ footer.phone_label }} <a href="{{ site.phone_link }}">{{ site.phone }}</a></li>{% endif %}
+                    {% if site.email %}<li>{{ footer.email_label }} <a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+                </ul>
+                {% endif %}
+            </div>
+
+            {# Quick links #}
+            <nav class="footer__col" aria-label="{{ footer.quick_links_heading }}">
+                <h3 class="footer__heading">{{ footer.quick_links_heading }}</h3>
+                <ul class="footer__links">
+                    {% for link in footer_quick_links %}
+                    <li><a href="{{ link.link }}" {% if link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {# Academic programs #}
+            <nav class="footer__col" aria-label="{{ footer.programs_heading }}">
+                <h3 class="footer__heading">{{ footer.programs_heading }}</h3>
+                <ul class="footer__links">
+                    {% for link in footer_program_links %}
+                    <li><a href="{{ link.link }}" {% if link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+
+            {# Official channels #}
+            <div class="footer__col">
+                <h3 class="footer__heading">{{ footer.channels_heading }}</h3>
+                {% if footer.channels_text %}<p class="footer__channels-text">{{ footer.channels_text }}</p>{% endif %}
+                {% if footer_social_links %}
+                <ul class="footer__social">
+                    {% for s in footer_social_links %}
+                    <li>
+                        {% if s.url %}
+                        <a href="{{ s.url }}" target="_blank" rel="noopener" aria-label="{{ s.get_platform_display }}" title="{{ s.get_platform_display }}"><i class="{{ s.icon_class }}" aria-hidden="true"></i></a>
+                        {% else %}
+                        <span aria-label="{{ s.get_platform_display }}" title="{{ s.get_platform_display }}"><i class="{{ s.icon_class }}" aria-hidden="true"></i></span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if footer.office_title %}<p class="footer__office-title">{{ footer.office_title }}</p>{% endif %}
+                {% if footer.office_hours %}<p class="footer__office-hours">{{ footer.office_hours }}</p>{% endif %}
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <p class="footer__copy">{{ footer.copyright }}</p>
+            {% if footer_legal_links %}
+            <ul class="footer__legal">
+                {% for link in footer_legal_links %}
+                <li><a href="{{ link.link }}" {% if link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</footer>

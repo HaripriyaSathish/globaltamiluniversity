@@ -1,0 +1,231 @@
+/* =====================================================================
+   Course openings – Figma: 1440 × 1301
+   List 1180 wide (130px sides). Row (Article) 1180 × 165.28, border-top 1px #D1E1E9
+   Button 120 × 44, radius 5.2, border 1px #FFBA10, padding 0 20, gap 8, top 61
+   Hover (300ms): light-blue row, 3px yellow bar, content shifts 12px, title turns yellow
+   ===================================================================== */
+
+.openings {
+    padding: 110px 0 44px;
+    background: var(--white);
+}
+
+.openings__container {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+}
+
+/* ---------- Header ---------- */
+.openings__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 448px;
+    column-gap: 40px;
+    align-items: start;
+}
+
+.openings__title {
+    margin-top: 10px;
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 56px;
+    color: var(--navy-heading);
+}
+
+.openings__text {
+    margin-top: 27px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.1px;
+    color: var(--text);
+}
+
+/* ---------- Rows ---------- */
+.openings__list {
+    margin-top: 32px;
+    border-bottom: 1px solid var(--border);
+}
+
+.opening {
+    --shift: 0px;
+    display: grid;
+    grid-template-columns: 76px 466px 218px minmax(0, 1fr) 120px;
+    align-items: start;
+    min-height: 165.28px;
+    padding: 0 16px 0 calc(16px + var(--shift));
+    border-top: 1px solid var(--border);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 0 var(--yellow);
+    transition: background-color .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+
+.opening:hover {
+    --shift: 12px;
+    background-color: var(--ice);
+    box-shadow: inset 3px 0 0 0 var(--yellow);
+}
+
+.opening__num {
+    margin-top: 30px;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--yellow);
+}
+
+.opening__label {
+    font-family: var(--font-heading);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 2px;
+    color: var(--navy);
+    text-transform: uppercase;
+}
+
+.opening__main > .opening__label { margin-top: 35px; }
+
+.opening__title {
+    margin-top: 15px;
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: var(--navy);
+    transition: color .3s ease;
+}
+
+.opening:hover .opening__title { color: var(--yellow); }
+
+/* Duration / Apply by / Eligibility */
+.opening__details { margin: 0; }
+.opening__details dt { margin-top: 38px; }
+.opening__details dd + dt { margin-top: 11px; }
+
+.opening__value {
+    margin: 4px 0 0;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--navy);
+}
+
+/* ---------- Status badge ---------- */
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 23px;
+    margin-top: 13px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status--open         { background: #E3F5EC; color: #0E7A45; }
+.status--filling_fast { background: #FFF1D1; color: #9A6500; }
+.status--closing_soon { background: #FDE4E4; color: #D42A2A; }
+.status--closed       { background: #EDF1F4; color: #6B7B8C; }
+
+/* ---------- Apply button (outline → pale yellow on hover) ---------- */
+.opening__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 120px;
+    min-height: 44px;
+    margin-top: 61px;
+    padding: 0 20px;
+    border: 1px solid var(--yellow);
+    border-radius: 5.2px;
+    background-color: transparent;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--yellow);
+    transition: background-color .3s ease, color .3s ease, border-color .3s ease;
+}
+
+.opening__btn .icon { transition: transform .3s ease; }
+
+.opening__btn:hover {
+    background-color: rgba(255, 186, 16, 0.14);
+}
+.opening__btn:hover .icon { transform: translateX(3px); }
+
+/* ---------- Footnote ---------- */
+.openings__note {
+    margin-top: 20px;
+    font-family: var(--font-text);
+    font-size: 12px;
+    line-height: 20px;
+    color: var(--text);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1260px) {
+    .openings__container { padding-inline: 32px; }
+    .opening { grid-template-columns: 64px minmax(0, 1.6fr) minmax(0, 0.8fr) minmax(0, 1fr) 120px; }
+}
+
+@media (max-width: 992px) {
+    .openings { padding: 80px 0 40px; }
+    .openings__container { padding-inline: 24px; }
+    .openings__header { grid-template-columns: 1fr; }
+    .openings__title { font-size: 44px; line-height: 48px; }
+    .openings__text { margin-top: 16px; max-width: 560px; }
+
+    .opening {
+        grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+            "num main main"
+            "num dur  elig"
+            "num btn  btn";
+        padding-bottom: 28px;
+    }
+    .opening__num { grid-area: num; }
+    .opening__main { grid-area: main; }
+    .opening__details:nth-of-type(1) { grid-area: dur; }
+    .opening__details:nth-of-type(2) { grid-area: elig; }
+    .opening__btn { grid-area: btn; margin-top: 20px; justify-self: start; }
+    .opening__details dt:first-child { margin-top: 20px; }
+}
+
+@media (max-width: 576px) {
+    .openings { padding: 56px 0 32px; }
+    .openings__container { padding-inline: 16px; }
+    .openings__title { font-size: 34px; line-height: 40px; }
+    .opening {
+        grid-template-columns: 40px minmax(0, 1fr);
+        grid-template-areas:
+            "num main"
+            "num dur"
+            "num elig"
+            "num btn";
+        padding-right: 12px;
+    }
+    .opening:hover { --shift: 6px; }
+    .opening__num { font-size: 20px; }
+    .opening__title { font-size: 20px; line-height: 26px; }
+    .opening__details:nth-of-type(2) dt:first-child { margin-top: 12px; }
+}

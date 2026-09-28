@@ -1,0 +1,17 @@
+{% load ui %}
+<section class="cta" id="cta"
+         {% if cta.background_image %}style="--cta-bg: url('{{ cta.background_image.url }}')"{% endif %}>
+    <div class="cta__content">
+        {% if cta.badge %}<span class="cta__badge">{{ cta.badge }}</span>{% endif %}
+        <h2 class="cta__title">{{ cta.title|linebreaksbr }}</h2>
+        {% if cta.description %}<p class="cta__text">{{ cta.description }}</p>{% endif %}
+        <div class="cta__actions">
+            {% if cta.primary_button_text %}
+            <a class="cta__btn cta__btn--primary" href="{{ cta.primary_button_link }}">{{ cta.primary_button_text }}</a>
+            {% endif %}
+            {% if cta.secondary_button_text %}
+            <a class="cta__btn cta__btn--ghost" href="{{ cta.secondary_button_link }}">{{ cta.secondary_button_text }}</a>
+            {% endif %}
+        </div>
+    </div>
+</section>

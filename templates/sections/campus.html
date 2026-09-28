@@ -1,0 +1,35 @@
+{% load ui %}
+<section class="campus" id="campus">
+    <div class="campus__inner">
+        <div class="campus__top">
+            <div class="campus__media">
+                {% if campus.image %}
+                <img src="{{ campus.image.url }}" alt="{{ campus.image_alt }}" width="786" height="462" loading="lazy">
+                {% endif %}
+            </div>
+
+            <div class="campus__content">
+                {% if campus.eyebrow %}<p class="eyebrow">{{ campus.eyebrow }}</p>{% endif %}
+                <h2 class="campus__title">{{ campus.title|linebreaksbr }}</h2>
+                {% if campus.description %}<p class="campus__text">{{ campus.description }}</p>{% endif %}
+                {% if campus.button_text %}
+                <a class="btn btn-outline campus__btn" href="{{ campus.button_link }}">
+                    {{ campus.button_text }} {% icon 'arrow-right' %}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if campus_facilities %}
+        <ul class="campus__grid">
+            {% for facility in campus_facilities %}
+            <li class="facility">
+                <span class="facility__num">{{ forloop.counter|stringformat:"02d" }}</span>
+                <h3 class="facility__title">{{ facility.title }}</h3>
+                {% if facility.description %}<p class="facility__text">{{ facility.description }}</p>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</section>

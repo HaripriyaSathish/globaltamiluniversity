@@ -1,0 +1,41 @@
+{% load ui %}
+<header class="navbar" id="navbar">
+    <div class="frame navbar__inner">
+        <a class="navbar__brand" href="#home" aria-label="{{ site.university_name }} – home">
+            {% if site.logo %}
+            <img class="navbar__logo" src="{{ site.logo.url }}" alt="{{ site.university_name }} logo" width="72" height="76">
+            {% endif %}
+            <span class="navbar__brand-text">
+                <span class="navbar__name">{{ site.university_name|break_last_word }}</span>
+                {% if site.established_text %}<span class="navbar__est">{{ site.established_text }}</span>{% endif %}
+            </span>
+        </a>
+
+        <nav class="navbar__nav" id="primary-nav" aria-label="Main">
+            <ul class="navbar__menu">
+                {% for item in nav_items %}
+                <li>
+                    <a class="navbar__link{% if forloop.first %} is-active{% endif %}" href="{{ item.link }}"
+                       {% if item.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ item.label }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if navbar.cta_text %}
+            <a class="btn btn-primary navbar__cta navbar__cta--mobile" href="{{ navbar.cta_link }}">
+                {{ navbar.cta_text }} {% icon 'arrow-right' %}
+            </a>
+            {% endif %}
+        </nav>
+
+        {% if navbar.cta_text %}
+        <a class="btn btn-primary navbar__cta" href="{{ navbar.cta_link }}">
+            {{ navbar.cta_text }} {% icon 'arrow-right' %}
+        </a>
+        {% endif %}
+
+        <button class="navbar__toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+            <span class="navbar__toggle-open">{% icon 'menu' size=26 %}</span>
+            <span class="navbar__toggle-close">{% icon 'x' size=26 %}</span>
+        </button>
+    </div>
+</header>

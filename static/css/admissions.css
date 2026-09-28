@@ -1,0 +1,94 @@
+/* =====================================================================
+   Admissions – Figma: section 1366 × 497 (37px in from each side)
+   Left panel 683 wide, padding 64, bg #FBFEFF
+   Right: image 664 × 390, vertically centred with the text
+   ===================================================================== */
+
+.admissions {
+    background: var(--white);
+}
+
+.admissions__inner {
+    width: 100%;
+    max-width: 1366px;
+    min-height: 497px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));   /* 683 + 683 */
+    align-items: stretch;
+}
+
+/* ---------- Left: text panel ---------- */
+.admissions__panel {
+    display: flex;
+    align-items: center;
+    padding: 64px;
+    background: #FBFEFF;
+}
+
+.admissions__title {
+    margin-top: 10px;
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 56px;
+    color: var(--navy-heading);
+}
+
+.admissions__text {
+    max-width: 500px;
+    margin-top: 14px;
+    font-family: var(--font-text);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 27px;
+    color: var(--text);
+}
+
+.admissions__btn {
+    margin-top: 29px;
+}
+
+/* ---------- Right: image (zooms on hover, like About) ---------- */
+.admissions__media-col {
+    display: flex;
+    align-items: center;
+}
+
+.admissions__media {
+    width: 664px;
+    max-width: 100%;
+    aspect-ratio: 664 / 390;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--ice);
+}
+
+.admissions__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.admissions__media:hover img { transform: scale(1.08); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px) {
+    .admissions__panel { padding: 48px 40px; }
+    .admissions__title { font-size: 44px; line-height: 48px; }
+    .admissions__media-col { padding-right: 32px; }
+}
+
+@media (max-width: 992px) {
+    .admissions__inner { grid-template-columns: 1fr; min-height: 0; }
+    .admissions__panel { padding: 64px 24px 32px; }
+    .admissions__media-col { padding: 0 24px 64px; }
+    .admissions__media { width: 100%; }
+}
+
+@media (max-width: 576px) {
+    .admissions__panel { padding: 56px 16px 28px; }
+    .admissions__media-col { padding: 0 16px 56px; }
+    .admissions__title { font-size: 34px; line-height: 40px; }
+}

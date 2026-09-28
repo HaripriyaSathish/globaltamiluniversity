@@ -1,0 +1,190 @@
+/* =====================================================================
+   Research (dark) – Figma: bg #0C3970
+   Container 1180, padding 109.28 top/bottom
+   Header: 2-col grid, gap 32, 206.7 tall  →  40px  →  media grid 507.5 tall, gap 20
+   Media columns 812 + 348 (7fr / 3fr); small image 255 tall; text block 181 tall
+   Images zoom in on hover
+   ===================================================================== */
+
+.research {
+    background: var(--navy-heading);         /* #0C3970 */
+    color: var(--white);
+}
+
+.research__container {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding: 109.28px 0;
+}
+
+/* ---------- Header ---------- */
+.research__header {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 32px;
+    min-height: 206.7px;
+}
+
+.research__title {
+    margin-top: 10px;
+    font-family: var(--font-heading);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 60px;
+    white-space: nowrap;
+    color: var(--white);
+}
+
+.research__text {
+    align-self: end;
+    justify-self: end;
+    max-width: 448px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 28px;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* Small yellow caps: RESEARCH HIGHLIGHT / FACULTY RESEARCH */
+.research__label {
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    color: var(--yellow);
+    text-transform: uppercase;
+}
+
+/* ---------- Media grid ---------- */
+.research__grid {
+    display: grid;
+    grid-template-columns: 7fr 3fr;           /* 812 + 348 */
+    gap: 20px;
+    height: 507.5px;
+    margin-top: 40px;
+}
+
+/* Large card: photo + navy fade + text at the bottom */
+.research-highlight {
+    position: relative;
+    overflow: hidden;
+    background: #173f73;
+}
+
+.research-highlight__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.research-highlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(12, 57, 112, 0) 30%,
+        rgba(12, 57, 112, 0.72) 62%,
+        rgba(12, 57, 112, 0.94) 100%);
+    pointer-events: none;
+}
+
+.research-highlight:hover .research-highlight__img { transform: scale(1.08); }
+
+.research-highlight__body {
+    position: absolute;
+    left: 48px;
+    right: 48px;
+    bottom: 48px;
+    z-index: 1;
+    max-width: 500px;
+}
+
+.research-highlight__title {
+    margin-top: 12px;
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 37px;
+    color: var(--white);
+}
+
+.research-highlight__text {
+    margin-top: 8px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 24px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Right column: image on top, text block at the bottom */
+.research-side {
+    display: grid;
+    grid-template-rows: 255px minmax(0, 1fr);
+    row-gap: 71px;
+}
+
+.research-side__media {
+    overflow: hidden;
+    background: #173f73;
+}
+
+.research-side__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .8s cubic-bezier(.2, .7, .2, 1);
+}
+
+.research-side__media:hover img { transform: scale(1.08); }
+
+.research-side__body {
+    padding-left: 18px;
+    border-left: 2px solid var(--yellow);
+}
+
+.research-side__title {
+    margin-top: 8px;
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--white);
+}
+
+.research-side__text {
+    margin-top: 8px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1260px) {
+    .research__container { padding-inline: 32px; }
+    .research__title { font-size: 40px; line-height: 50px; white-space: normal; }
+}
+
+@media (max-width: 992px) {
+    .research__container { padding: 80px 24px; }
+    .research__header { grid-template-columns: 1fr; row-gap: 20px; min-height: 0; }
+    .research__text { justify-self: start; max-width: 560px; }
+    .research__grid { grid-template-columns: 1fr; height: auto; }
+    .research-highlight { height: 460px; }
+    .research-side { grid-template-rows: 280px auto; row-gap: 28px; }
+}
+
+@media (max-width: 576px) {
+    .research__container { padding: 56px 16px; }
+    .research__title { font-size: 32px; line-height: 40px; }
+    .research-highlight { height: 420px; }
+    .research-highlight__body { left: 20px; right: 20px; bottom: 24px; }
+    .research-highlight__title { font-size: 24px; line-height: 30px; }
+    .research-side { grid-template-rows: 220px auto; }
+}

@@ -1,0 +1,157 @@
+/* =====================================================================
+   Global Tamil University – base styles
+   Design frame: 1440px (Figma). All sizes below are Figma px.
+   ===================================================================== */
+
+:root {
+    /* Brand colours (from Figma) */
+    --navy: #0B386F;          /* top bar, nav text, buttons text */
+    --navy-heading: #0C3970;  /* big headings */
+    --yellow: #FFBA10;        /* buttons, highlights */
+    --border: #D1E1E9;        /* borders, dividers */
+    --ice: #E4F9FF;           /* hero gradient */
+    --header-bg: rgba(251, 254, 255, 0.95);  /* #FBFEFF 95% */
+    --text: #4A5B6D;          /* body text */
+    --white: #FFFFFF;
+
+    /* Fonts */
+    --font-heading: 'Manrope', system-ui, sans-serif;
+    --font-text: 'DM Sans', system-ui, sans-serif;
+
+    /* Layout */
+    --frame: 1440px;
+    --topbar-h: 36px;
+    --header-h: 81px;
+    --fixed-h: calc(var(--topbar-h) + var(--header-h));   /* 117px */
+}
+
+body.no-topbar { --topbar-h: 0px; }
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding-top: var(--fixed-h);          /* space for fixed top bar + navbar */
+    font-family: var(--font-text);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: var(--font-heading);
+    color: var(--navy-heading);
+}
+
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* Anchor jumps land below the fixed header */
+section[id], [id].anchor { scroll-margin-top: var(--fixed-h); }
+
+.icon { flex-shrink: 0; }
+
+/* Centered 1440 frame */
+.frame {
+    width: 100%;
+    max-width: var(--frame);
+    margin-inline: auto;
+}
+
+/* ---------- Eyebrow: yellow dash + small navy caps ("— OUR ACADEMICS") ---------- */
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 16px;
+    letter-spacing: 1.5px;
+    color: var(--navy);
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--yellow);
+    flex-shrink: 0;
+}
+
+.eyebrow--yellow { color: var(--yellow); }   /* on dark backgrounds */
+
+/* ---------- Buttons ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 43px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 3px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.btn .icon { width: 16px; height: 16px; transition: transform .2s ease; }
+.btn:hover .icon { transform: translateX(3px); }
+
+.btn-primary {
+    background: var(--yellow);
+    color: var(--navy);
+}
+.btn-primary:hover {
+    background: #F2AE00;
+    box-shadow: 0 8px 20px rgba(255, 186, 16, .35);
+}
+
+/* Outline button: yellow border + text, pale fill on hover */
+.btn-outline {
+    background: transparent;
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+    transition: background-color .3s ease, color .3s ease;
+}
+.btn-outline:hover { background: rgba(255, 186, 16, 0.14); }
+
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 3px;
+}
+
+/* Screen-reader only */
+.sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0, 0, 0, 0);
+    white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+}

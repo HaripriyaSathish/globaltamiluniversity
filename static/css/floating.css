@@ -1,0 +1,42 @@
+/* =====================================================================
+   Floating contact buttons – fixed, right side
+   Figma: 52 × 52 circles, #FFBA10, white outline icons, 23px apart
+   ===================================================================== */
+
+.floating {
+    position: fixed;
+    right: 26px;
+    bottom: 50px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.floating__btn {
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--white);
+    border: 1.5px solid rgba(11, 56, 111, 0.35);
+    box-shadow: 0 8px 22px rgba(255, 186, 16, 0.35);
+    transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.floating__btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: #F2AE00;
+    box-shadow: 0 12px 28px rgba(255, 186, 16, 0.5);
+}
+
+.floating__btn .icon { width: 28px; height: 28px; }
+
+@media (max-width: 576px) {
+    .floating { right: 14px; bottom: 20px; gap: 12px; }
+    .floating__btn { width: 46px; height: 46px; }
+    .floating__btn .icon { width: 24px; height: 24px; }
+}

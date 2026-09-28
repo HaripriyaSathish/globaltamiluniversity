@@ -1,0 +1,55 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{{ site.meta_title }}{% endblock %}</title>
+    <meta name="description" content="{{ site.meta_description }}">
+    {% if site.meta_keywords %}<meta name="keywords" content="{{ site.meta_keywords }}">{% endif %}
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ site.meta_title }}">
+    <meta property="og:description" content="{{ site.meta_description }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    {% if site.og_image %}<meta property="og:image" content="{{ site.og_image.url }}">{% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+
+    {% if site.favicon %}<link rel="icon" href="{{ site.favicon.url }}">{% endif %}
+
+    <!-- Fonts: Manrope (headings), DM Sans (text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome: icons chosen in admin ("fa-solid fa-...") -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/topbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/academics.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admissions.css' %}">
+    <link rel="stylesheet" href="{% static 'css/openings.css' %}">
+    <link rel="stylesheet" href="{% static 'css/research.css' %}">
+    <link rel="stylesheet" href="{% static 'css/research_areas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/campus.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+    <link rel="stylesheet" href="{% static 'css/apply.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cta.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/floating.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="{% if not site.show_topbar %}no-topbar{% endif %}">
+    {% block content %}{% endblock %}
+
+    <script src="{% static 'js/main.js' %}" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

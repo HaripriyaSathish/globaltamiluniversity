@@ -1,0 +1,43 @@
+{% load ui %}
+<section class="contact" id="contact"
+         {% if contact.background_image %}style="--contact-bg: url('{{ contact.background_image.url }}')"{% endif %}>
+    <div class="contact__container">
+        <div class="contact__info">
+            {% if contact.eyebrow %}<p class="eyebrow eyebrow--yellow">{{ contact.eyebrow }}</p>{% endif %}
+            <h2 class="contact__title">{{ contact.title|linebreaksbr }}</h2>
+            {% if contact.description %}<p class="contact__text">{{ contact.description }}</p>{% endif %}
+
+            {% if contact.show_contact_details %}
+            <ul class="contact__details">
+                {% if site.address %}<li>{% icon 'map-pin' size=20 stroke=1.8 %}<span>{{ site.address }}</span></li>{% endif %}
+                {% if site.email %}<li>{% icon 'mail' size=20 stroke=1.8 %}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>{% endif %}
+                {% if site.phone %}<li>{% icon 'phone' size=20 stroke=1.8 %}<a href="{{ site.phone_link }}">{{ site.phone }}</a></li>{% endif %}
+            </ul>
+            {% endif %}
+        </div>
+
+        {% with form=contact_form %}
+        <form class="contact__card form--dark js-validate" action="{% url 'website:submit_contact' %}" method="post" novalidate>
+            {% csrf_token %}
+            {{ form.website }}
+
+            <div class="form-alert form-alert--success" role="status" hidden></div>
+            <div class="form-alert form-alert--error" role="alert" {% if not form.non_field_errors %}hidden{% endif %}>{{ form.non_field_errors|join:" " }}</div>
+
+            <div class="form-grid contact__grid">
+                {% for field in form %}{% if field.name != 'website' %}
+                <div class="form-field{% if field.name == 'message' %} form-field--full{% endif %}{% if field.errors %} has-error{% endif %}">
+                    <label class="sr-only" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.name == 'subject' %}<div class="form-select">{{ field }}</div>{% else %}{{ field }}{% endif %}
+                    <p class="form-error" id="{{ field.id_for_label }}-error" {% if not field.errors %}hidden{% endif %}>{{ field.errors|first }}</p>
+                </div>
+                {% endif %}{% endfor %}
+            </div>
+
+            <button class="btn btn-primary contact__submit" type="submit">
+                {{ contact.submit_text }} {% icon 'arrow-right' %}
+            </button>
+        </form>
+        {% endwith %}
+    </div>
+</section>

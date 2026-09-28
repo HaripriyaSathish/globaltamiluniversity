@@ -1,0 +1,25 @@
+{% load ui %}
+<section class="admissions" id="admissions">
+    <div class="admissions__inner">
+        <div class="admissions__panel">
+            <div class="admissions__content">
+                {% if admissions.eyebrow %}<p class="eyebrow">{{ admissions.eyebrow }}</p>{% endif %}
+                <h2 class="admissions__title">{{ admissions.title|linebreaksbr }}</h2>
+                {% if admissions.description %}<p class="admissions__text">{{ admissions.description }}</p>{% endif %}
+                {% if admissions.button_text %}
+                <a class="btn btn-primary admissions__btn" href="{{ admissions.button_link }}">
+                    {{ admissions.button_text }} {% icon 'arrow-right' %}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="admissions__media-col">
+            <div class="admissions__media">
+                {% if admissions.image %}
+                <img src="{{ admissions.image.url }}" alt="{{ admissions.image_alt }}" width="664" height="390" loading="lazy">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

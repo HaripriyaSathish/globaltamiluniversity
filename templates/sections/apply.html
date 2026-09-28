@@ -1,0 +1,54 @@
+{% load ui %}
+<section class="apply" id="apply">
+    <div class="apply__container">
+        <div class="apply__intro">
+            {% if apply.eyebrow %}<p class="eyebrow">{{ apply.eyebrow }}</p>{% endif %}
+            <h2 class="apply__title">{{ apply.title|linebreaksbr }}</h2>
+            {% if apply.description %}<p class="apply__text">{{ apply.description }}</p>{% endif %}
+            {% if apply_points %}
+            <ul class="apply__points">
+                {% for point in apply_points %}
+                <li class="apply__point">
+                    <span class="apply__check" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    </span>
+                    {{ point.text }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        {% with form=apply_form %}
+        <form class="apply__card js-validate" action="{% url 'website:submit_application' %}" method="post" novalidate>
+            {% csrf_token %}
+            {{ form.website }}
+
+            <div class="form-alert form-alert--success" role="status" hidden></div>
+            <div class="form-alert form-alert--error" role="alert" {% if not form.non_field_errors %}hidden{% endif %}>{{ form.non_field_errors|join:" " }}</div>
+
+            <div class="form-grid">
+                {% for field in form %}{% if field.name != 'website' and field.name != 'consent' %}
+                <div class="form-field{% if field.name == 'goals' %} form-field--full{% endif %}{% if field.errors %} has-error{% endif %}">
+                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {% if field.name == 'program' %}<div class="form-select">{{ field }}</div>{% else %}{{ field }}{% endif %}
+                    <p class="form-error" id="{{ field.id_for_label }}-error" {% if not field.errors %}hidden{% endif %}>{{ field.errors|first }}</p>
+                </div>
+                {% endif %}{% endfor %}
+            </div>
+
+            <div class="form-consent{% if form.consent.errors %} has-error{% endif %}">
+                <label class="form-check">
+                    {{ form.consent }}
+                    <span>{{ form.consent.label }}</span>
+                </label>
+                <p class="form-error" id="{{ form.consent.id_for_label }}-error" {% if not form.consent.errors %}hidden{% endif %}>{{ form.consent.errors|first }}</p>
+            </div>
+
+            <button class="btn btn-primary apply__submit" type="submit">
+                <span class="btn__label">{{ apply.submit_text }}</span> {% icon 'arrow-right' %}
+            </button>
+        </form>
+        {% endwith %}
+    </div>
+</section>

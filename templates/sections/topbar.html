@@ -1,0 +1,26 @@
+{% load ui %}
+<div class="topbar" role="region" aria-label="Contact information">
+    <div class="frame topbar__inner">
+        {% if site.address %}
+        <p class="topbar__item">
+            {% icon 'map-pin' size=16 %}
+            <span>{{ site.address }}</span>
+        </p>
+        {% endif %}
+
+        <div class="topbar__right">
+            {% if site.email %}
+            <a class="topbar__item" href="mailto:{{ site.email }}">
+                {% icon 'mail' size=16 %}
+                <span>{{ site.email }}</span>
+            </a>
+            {% endif %}
+            {% if site.phone %}
+            <a class="topbar__item" href="{{ site.phone_link }}">
+                {% icon 'phone' size=16 %}
+                <span>{{ site.phone }}</span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

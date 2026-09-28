@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if site.show_topbar %}{% include 'sections/topbar.html' %}{% endif %}
+    {% include 'sections/navbar.html' %}
+    {% if hero %}{% include 'sections/hero.html' %}{% endif %}
+    {% if about %}{% include 'sections/about.html' %}{% endif %}
+    {% if academics %}{% include 'sections/academics.html' %}{% endif %}
+    {% if admissions %}{% include 'sections/admissions.html' %}{% endif %}
+    {% if openings %}{% include 'sections/openings.html' %}{% endif %}
+    {% if research %}{% include 'sections/research.html' %}{% endif %}
+    {% if research_areas %}{% include 'sections/research_areas.html' %}{% endif %}
+    {% if campus %}{% include 'sections/campus.html' %}{% endif %}
+    {% if gallery %}{% include 'sections/gallery.html' %}{% endif %}
+    {% if apply %}{% include 'sections/apply.html' %}{% endif %}
+    {% if contact %}{% include 'sections/contact.html' %}{% endif %}
+    {% if cta %}{% include 'sections/cta.html' %}{% endif %}
+    {% include 'sections/footer.html' %}
+    {% include 'sections/floating_buttons.html' %}
+{% endblock %}

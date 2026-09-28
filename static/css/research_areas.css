@@ -1,0 +1,123 @@
+/* =====================================================================
+   Research areas – Figma: 1440 × 694.94, bg #FFFFFF
+   Grid 1180 wide, 2 columns (480 + 652), 48px gap, padding 109.28 top/bottom
+   Right list: items 158.4 tall, 1px #D1E1E9 borders
+   ===================================================================== */
+
+.areas {
+    background: var(--white);
+}
+
+.areas__container {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding: 109.28px 0;
+    display: grid;
+    grid-template-columns: 480px minmax(0, 1fr);    /* 480 + 652 */
+    column-gap: 48px;
+    align-items: start;
+}
+
+/* ---------- Left: intro + tags ---------- */
+.areas__title {
+    margin-top: 10px;
+    font-family: var(--font-heading);
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 56px;
+    color: var(--navy-heading);
+}
+
+.areas__text {
+    margin-top: 16px;
+    font-family: var(--font-text);
+    font-size: 15px;
+    line-height: 26px;
+    letter-spacing: -0.3px;
+    color: var(--text);
+}
+
+.areas__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 8px;
+    margin-top: 29px;
+}
+
+.areas__tag {
+    display: inline-flex;
+    align-items: center;
+    height: 33px;
+    padding: 0 12px;
+    border: 1px solid var(--yellow);
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy);
+    transition: background-color .3s ease;
+}
+
+.areas__tag:hover { background-color: rgba(255, 186, 16, 0.14); }
+
+/* ---------- Right: numbered list ---------- */
+.areas__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--border);
+}
+
+.areas__item {
+    min-height: 158.4px;
+    padding: 24px 0 21.6px;
+    border-top: 1px solid var(--border);
+}
+
+.areas__label {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 16px;
+    letter-spacing: 0.8px;
+    color: var(--yellow);
+    text-transform: uppercase;
+}
+
+.areas__item-title {
+    margin-top: 15px;
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    color: var(--navy);
+    transition: color .3s ease;
+}
+
+.areas__item:hover .areas__item-title { color: var(--yellow); }
+
+.areas__item-text {
+    max-width: 560px;
+    margin-top: 6px;
+    font-family: var(--font-text);
+    font-size: 13px;
+    line-height: 22.4px;
+    color: var(--text);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1260px) {
+    .areas__container { padding-inline: 32px; grid-template-columns: 400px minmax(0, 1fr); }
+    .areas__title { font-size: 44px; line-height: 50px; }
+}
+
+@media (max-width: 992px) {
+    .areas__container { padding: 80px 24px; grid-template-columns: 1fr; row-gap: 40px; }
+}
+
+@media (max-width: 576px) {
+    .areas__container { padding: 56px 16px; }
+    .areas__title { font-size: 34px; line-height: 40px; }
+    .areas__item { min-height: 0; }
+}

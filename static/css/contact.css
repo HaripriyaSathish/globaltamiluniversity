@@ -1,0 +1,124 @@
+/* =====================================================================
+   Contact – Figma: 1440 × 553.47, padding 109.28 top/bottom
+   Background photo + #0B386F 90% overlay
+   Info column 482 + 48 gap + form card 650 (1180 container)
+   Card: padding 24, 1px light border; fields 46.4 tall, gaps 12 / 12.8; message 102.4
+   ===================================================================== */
+
+.contact {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--navy);
+    background-image:
+        linear-gradient(rgba(11, 56, 111, 0.9), rgba(11, 56, 111, 0.9)),
+        var(--contact-bg, none);
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+}
+
+.contact__container {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    padding: 109.28px 0;
+    display: grid;
+    grid-template-columns: 482px minmax(0, 1fr);
+    column-gap: 48px;
+    align-items: start;
+}
+
+/* ---------- Left: info ---------- */
+.contact__title {
+    margin-top: 10px;
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+    color: var(--white);
+}
+
+.contact__text {
+    max-width: 400px;
+    margin-top: 8px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 28px;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.contact__details li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--white);
+}
+
+.contact__details .icon { color: var(--yellow); width: 20px; height: 20px; }
+.contact__details a:hover { color: var(--yellow); }
+
+/* ---------- Right: form card (dark) ---------- */
+.contact__card {
+    padding: 24px 24px 25.6px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.contact__grid { gap: 12.8px 12px; }
+
+.form--dark .form-field input,
+.form--dark .form-field select,
+.form--dark .form-field textarea {
+    height: 46.4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    font-size: 13px;
+    color: var(--white);
+}
+
+.form--dark .form-field textarea { height: 102.4px; }
+.form--dark .form-field ::placeholder { color: rgba(255, 255, 255, 0.7); }
+.form--dark .form-select::after { border-color: var(--white); }
+.form--dark .form-select select option { color: var(--navy); }
+
+.form--dark .form-field input:focus,
+.form--dark .form-field select:focus,
+.form--dark .form-field textarea:focus {
+    border-color: var(--yellow);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(255, 186, 16, 0.2);
+}
+
+.form--dark .form-error { color: #FFB4B4; }
+.form--dark .has-error input,
+.form--dark .has-error select,
+.form--dark .has-error textarea { border-color: #FF8A8A; }
+
+.contact__submit { margin-top: 20px; padding: 0 18.5px; height: 42.4px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1260px) {
+    .contact__container { padding-inline: 32px; grid-template-columns: 380px minmax(0, 1fr); column-gap: 32px; }
+}
+
+@media (max-width: 992px) {
+    .contact__container { grid-template-columns: 1fr; row-gap: 40px; padding: 80px 24px; }
+}
+
+@media (max-width: 576px) {
+    .contact__container { padding: 56px 16px; }
+    .contact__title { font-size: 30px; line-height: 38px; }
+    .contact__card { padding: 18px; }
+    .contact__grid { grid-template-columns: 1fr; }
+    .contact__submit { width: 100%; }
+}

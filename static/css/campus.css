@@ -1,0 +1,155 @@
+/* =====================================================================
+   Campus – Figma: bg #E3F8FF
+   Image 786 × 462 at the top-left (37px in), slow continuous zoom
+   Text column 64px right of the image, vertically centred
+   Cards "Infrastructure Pillars": 1216 wide, 4 × 2 grid, 16px gaps, 25px below the image
+   Card 292 × 150, radius 2, border 1px #D9E2D5, bg #FFF, padding 20 20 36 20, gap 4
+   ===================================================================== */
+
+.campus {
+    --serif: 'Playfair Display', Georgia, serif;
+    background: #E3F8FF;
+}
+
+.campus__inner {
+    width: 100%;
+    max-width: var(--frame);
+    margin-inline: auto;
+    padding-bottom: 25px;
+}
+
+/* ---------- Top: image + text ---------- */
+.campus__top {
+    display: grid;
+    grid-template-columns: 786px minmax(0, 1fr);
+    column-gap: 64px;
+    align-items: center;
+    padding-left: 37px;
+}
+
+.campus__media {
+    height: 462px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #cfe9f3;
+}
+
+/* Continuous zoom in / zoom out */
+.campus__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: campus-zoom 8s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes campus-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.12); }
+}
+
+.campus__content {
+    max-width: 480px;
+}
+
+.campus__title {
+    margin-top: 11px;
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 55px;
+    color: var(--navy-heading);
+}
+
+.campus__text {
+    max-width: 470px;
+    margin-top: 17px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    line-height: 26px;
+    color: var(--text);
+}
+
+.campus__btn {
+    margin-top: 30px;
+    padding: 0 20.5px;
+}
+
+/* ---------- Facility cards ---------- */
+.campus__grid {
+    width: 1216px;
+    max-width: calc(100% - 48px);
+    margin: 25px auto 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 150px;
+    gap: 16px;
+}
+
+.facility {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 20px 36px;
+    background: var(--white);
+    border: 1px solid #D9E2D5;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 0 var(--yellow);
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+.facility__num {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+    color: var(--yellow);
+}
+
+.facility__title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: var(--navy);
+    transition: color .3s ease;
+}
+
+.facility__text {
+    font-family: var(--font-text);
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--text);
+}
+
+/* Hover: yellow border (2px look) + yellow title */
+.facility:hover {
+    border-color: var(--yellow);
+    box-shadow: inset 0 0 0 1px var(--yellow), 0 10px 24px rgba(255, 186, 16, 0.12);
+}
+
+.facility:hover .facility__title { color: var(--yellow); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1280px) {
+    .campus__top { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 48px; padding-right: 32px; }
+    .campus__title { font-size: 44px; line-height: 48px; }
+}
+
+@media (max-width: 992px) {
+    .campus__top { grid-template-columns: 1fr; row-gap: 40px; padding: 0 24px; }
+    .campus__media { height: 380px; }
+    .campus__content { max-width: none; }
+    .campus__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; margin-top: 40px; }
+    .facility { min-height: 150px; }
+    .campus__inner { padding-bottom: 64px; }
+}
+
+@media (max-width: 576px) {
+    .campus__top { padding: 0 16px; }
+    .campus__media { height: 240px; }
+    .campus__title { font-size: 34px; line-height: 40px; }
+    .campus__grid { grid-template-columns: 1fr; max-width: calc(100% - 32px); gap: 12px; }
+    .facility { min-height: 0; padding-bottom: 24px; }
+    .campus__inner { padding-bottom: 48px; }
+}

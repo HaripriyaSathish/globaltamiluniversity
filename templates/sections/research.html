@@ -1,0 +1,42 @@
+{% load ui %}
+<section class="research" id="research">
+    <div class="research__container">
+        <header class="research__header">
+            <div>
+                {% if research.eyebrow %}<p class="eyebrow eyebrow--yellow">{{ research.eyebrow }}</p>{% endif %}
+                <h2 class="research__title">{{ research.title|linebreaksbr }}</h2>
+            </div>
+            {% if research.description %}<p class="research__text">{{ research.description }}</p>{% endif %}
+        </header>
+
+        <div class="research__grid">
+            {# Large image card with text over the photo #}
+            <article class="research-highlight">
+                {% if research.highlight_image %}
+                <img class="research-highlight__img" src="{{ research.highlight_image.url }}"
+                     alt="{{ research.highlight_image_alt }}" width="812" height="508" loading="lazy">
+                {% endif %}
+                <div class="research-highlight__body">
+                    {% if research.highlight_label %}<p class="research__label">{{ research.highlight_label }}</p>{% endif %}
+                    {% if research.highlight_title %}<h3 class="research-highlight__title">{{ research.highlight_title }}</h3>{% endif %}
+                    {% if research.highlight_description %}<p class="research-highlight__text">{{ research.highlight_description }}</p>{% endif %}
+                </div>
+            </article>
+
+            {# Small image + text with yellow line #}
+            <div class="research-side">
+                <div class="research-side__media">
+                    {% if research.side_image %}
+                    <img src="{{ research.side_image.url }}" alt="{{ research.side_image_alt }}"
+                         width="348" height="255" loading="lazy">
+                    {% endif %}
+                </div>
+                <div class="research-side__body">
+                    {% if research.side_label %}<p class="research__label">{{ research.side_label }}</p>{% endif %}
+                    {% if research.side_title %}<h3 class="research-side__title">{{ research.side_title }}</h3>{% endif %}
+                    {% if research.side_description %}<p class="research-side__text">{{ research.side_description }}</p>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

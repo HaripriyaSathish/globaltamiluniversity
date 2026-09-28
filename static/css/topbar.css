@@ -1,0 +1,56 @@
+/* =====================================================================
+   Top bar – Figma: 1440 × 36, fixed, #0B386F
+   ===================================================================== */
+
+.topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 1001;
+    height: var(--topbar-h);
+    background: var(--navy);
+    color: var(--white);
+}
+
+.topbar__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 130px;
+}
+
+.topbar__right {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.topbar__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-text);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.topbar__item .icon { color: var(--yellow); width: 14px; height: 14px; }
+a.topbar__item:hover span { color: var(--yellow); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px) {
+    .topbar__inner { padding-inline: 40px; }
+}
+
+@media (max-width: 768px) {
+    .topbar__inner { padding-inline: 16px; justify-content: center; }
+    .topbar__inner > .topbar__item { display: none; }      /* hide address on phones */
+    .topbar__right { gap: 16px; }
+    .topbar__item { font-size: 13px; }
+}
+
+@media (max-width: 400px) {
+    .topbar__right a[href^="mailto"] span { display: none; }  /* icon only for email */
+}

@@ -1,0 +1,130 @@
+/* =====================================================================
+   CTA banner – Figma: 1440 × 504, photo + #0B386F 70% overlay
+   33px white space above and below. Photo zooms in/out quickly (loop)
+   ===================================================================== */
+
+.cta {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    max-width: var(--frame);
+    min-height: 504px;
+    margin: 33px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+}
+
+/* Photo layer – fast zoom */
+.cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--cta-bg, none);
+    background-size: cover;
+    background-position: center;
+    animation: cta-zoom 6s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* #0B386F 70% overlay */
+.cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(11, 56, 111, 0.7);
+}
+
+@keyframes cta-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.15); }
+}
+
+.cta__content {
+    max-width: 780px;
+    padding: 40px 24px;
+}
+
+.cta__badge {
+    display: inline-flex;
+    align-items: center;
+    height: 22.4px;
+    padding: 0 11px;
+    background: var(--yellow);
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--navy);
+    text-transform: uppercase;
+}
+
+.cta__title {
+    margin-top: 21.6px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 72px;
+    color: var(--white);
+    text-wrap: balance;
+}
+
+.cta__text {
+    max-width: 690px;
+    margin: 15px auto 0;
+    font-family: var(--font-text);
+    font-size: 19px;
+    line-height: 28px;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 41px;
+}
+
+.cta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46.4px;
+    padding: 0 37px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color .3s ease, color .3s ease, border-color .3s ease, transform .3s ease;
+}
+
+.cta__btn--primary { background: var(--yellow); color: var(--navy); }
+.cta__btn--primary:hover { background: #F2AE00; transform: translateY(-2px); }
+
+.cta__btn--ghost {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.75);
+    color: var(--white);
+}
+.cta__btn--ghost:hover { background: var(--white); color: var(--navy); transform: translateY(-2px); }
+
+@media (max-width: 768px) {
+    .cta { min-height: 440px; margin: 24px auto; }
+    .cta__title { font-size: 42px; line-height: 50px; }
+    .cta__text { font-size: 16px; line-height: 26px; }
+    .cta__actions { margin-top: 28px; }
+}
+
+@media (max-width: 400px) {
+    .cta__title { font-size: 34px; line-height: 42px; }
+    .cta__btn { width: 100%; }
+}

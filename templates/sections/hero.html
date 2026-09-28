@@ -1,0 +1,29 @@
+{% load ui %}
+<section class="hero" id="home"
+         {% if hero.background_image %}style="--hero-bg: url('{{ hero.background_image.url }}')"{% endif %}>
+    <div class="frame hero__inner">
+        <div class="hero__content">
+            {% if hero_tag_words %}
+            <p class="hero__tags">
+                {% for word in hero_tag_words %}
+                    <span>{{ word.text }}</span>{% if not forloop.last %}<span class="hero__tags-sep" aria-hidden="true">|</span>{% endif %}
+                {% endfor %}
+            </p>
+            {% endif %}
+
+            <h1 class="hero__title">
+                <span class="hero__title-main">{{ hero.title_line_1 }}</span>
+                {% if hero.title_highlight %}<span class="hero__title-highlight">{{ hero.title_highlight }}</span>{% endif %}
+            </h1>
+
+            {% if hero.subtitle %}<p class="hero__subtitle">{{ hero.subtitle }}</p>{% endif %}
+            {% if hero.description %}<p class="hero__text">{{ hero.description }}</p>{% endif %}
+
+            {% if hero.button_text %}
+            <a class="btn btn-primary hero__btn" href="{{ hero.button_link }}">
+                {{ hero.button_text }} {% icon 'arrow-right' %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>

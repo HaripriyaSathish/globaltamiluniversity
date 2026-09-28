@@ -1,0 +1,27 @@
+<section class="areas" id="research-areas">
+    <div class="areas__container">
+        <div class="areas__intro">
+            {% if research_areas.eyebrow %}<p class="eyebrow">{{ research_areas.eyebrow }}</p>{% endif %}
+            <h2 class="areas__title">{{ research_areas.title|linebreaksbr }}</h2>
+            {% if research_areas.description %}<p class="areas__text">{{ research_areas.description }}</p>{% endif %}
+
+            {% if research_tags %}
+            <ul class="areas__tags">
+                {% for tag in research_tags %}<li class="areas__tag">{{ tag.name }}</li>{% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        {% if research_focus_items %}
+        <ol class="areas__list">
+            {% for item in research_focus_items %}
+            <li class="areas__item">
+                <p class="areas__label">{{ forloop.counter|stringformat:"02d" }} / {{ item.label }}</p>
+                <h3 class="areas__item-title">{{ item.title }}</h3>
+                {% if item.description %}<p class="areas__item-text">{{ item.description }}</p>{% endif %}
+            </li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+    </div>
+</section>

@@ -1,0 +1,35 @@
+{% load ui %}
+<section class="about" id="about">
+    <div class="frame about__grid">
+        <div class="about__media">
+            {% if about.image %}
+            <img src="{{ about.image.url }}" alt="{{ about.image_alt }}" width="664" height="386" loading="lazy">
+            {% endif %}
+        </div>
+
+        <div class="about__content">
+            {% if about.eyebrow %}<p class="about__eyebrow">{{ about.eyebrow }}</p>{% endif %}
+            <h2 class="about__title">{{ about.title|linebreaksbr }}</h2>
+            {% if about.description %}<p class="about__text">{{ about.description }}</p>{% endif %}
+
+            {% if about_features %}
+            <ul class="about__features">
+                {% for feature in about_features %}
+                <li class="about__card">
+                    <span class="about__card-icon" aria-hidden="true">
+                        {% any_icon feature.icon_class size=18 stroke=2 %}
+                    </span>
+                    <span class="about__card-title">{{ feature.title }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if about.link_text %}
+            <a class="about__link" href="{{ about.link_url }}">
+                {{ about.link_text }} {% icon 'arrow-right' size=18 %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>

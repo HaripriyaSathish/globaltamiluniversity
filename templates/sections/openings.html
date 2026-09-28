@@ -1,0 +1,50 @@
+{% load ui %}
+<section class="openings" id="openings">
+    <div class="openings__container">
+        <header class="openings__header">
+            <div>
+                {% if openings.eyebrow %}<p class="eyebrow">{{ openings.eyebrow }}</p>{% endif %}
+                <h2 class="openings__title">{{ openings.title|linebreaksbr }}</h2>
+            </div>
+            {% if openings.description %}<p class="openings__text">{{ openings.description }}</p>{% endif %}
+        </header>
+
+        {% if course_openings %}
+        <div class="openings__list">
+            {% for course in course_openings %}
+            <article class="opening">
+                <span class="opening__num">{{ forloop.counter|stringformat:"02d" }}</span>
+
+                <div class="opening__main">
+                    <p class="opening__label">{{ course.get_level_display }}</p>
+                    <h3 class="opening__title">{{ course.title }}</h3>
+                    <span class="status status--{{ course.status }}">{{ course.get_status_display }}</span>
+                </div>
+
+                <dl class="opening__details">
+                    <dt class="opening__label">Duration</dt>
+                    <dd class="opening__value">{{ course.duration }}</dd>
+                    {% if course.apply_by %}
+                    <dt class="opening__label">Apply by</dt>
+                    <dd class="opening__value">{{ course.apply_by|date:"j M Y" }}</dd>
+                    {% endif %}
+                </dl>
+
+                <dl class="opening__details">
+                    <dt class="opening__label">Eligibility</dt>
+                    <dd class="opening__value">{{ course.eligibility }}</dd>
+                </dl>
+
+                {% if openings.apply_button_text and course.status != 'closed' %}
+                <a class="opening__btn" href="{{ course.get_apply_link }}" data-program="{{ course.pk }}">
+                    {{ openings.apply_button_text }} {% icon 'arrow-right' size=16 %}
+                </a>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if openings.footnote %}<p class="openings__note">{{ openings.footnote }}</p>{% endif %}
+    </div>
+</section>

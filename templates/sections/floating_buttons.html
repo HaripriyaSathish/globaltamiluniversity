@@ -1,0 +1,15 @@
+{% load ui %}
+{% if floating_buttons %}
+<div class="floating" aria-label="Quick contact">
+    {% for btn in floating_buttons %}
+    <a class="floating__btn floating__btn--{{ btn.button_type }}" href="{{ btn.href }}"
+       aria-label="{{ btn.label }}" title="{{ btn.label }}"
+       {% if btn.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>
+        {% if btn.button_type == 'whatsapp' %}{% icon 'whatsapp' size=28 stroke=1.8 %}
+        {% elif btn.button_type == 'email' %}{% icon 'mail' size=28 stroke=1.8 %}
+        {% elif btn.button_type == 'phone' %}{% icon 'phone-outgoing' size=28 stroke=1.8 %}
+        {% else %}{% icon 'arrow-right' size=28 stroke=1.8 %}{% endif %}
+    </a>
+    {% endfor %}
+</div>
+{% endif %}

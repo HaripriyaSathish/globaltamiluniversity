@@ -1,0 +1,28 @@
+{% load ui %}
+<section class="academics" id="academics"
+         {% if academics.background_image %}style="--academics-bg: url('{{ academics.background_image.url }}')"{% endif %}>
+    <div class="academics__container">
+        <div class="academics__intro">
+            {% if academics.eyebrow %}<p class="eyebrow">{{ academics.eyebrow }}</p>{% endif %}
+            <h2 class="academics__title">{{ academics.title|linebreaksbr }}</h2>
+            {% if academics.description %}<p class="academics__text">{{ academics.description }}</p>{% endif %}
+            {% if academics.button_text %}
+            <a class="btn btn-primary academics__btn" href="{{ academics.button_link }}">
+                {{ academics.button_text }} {% icon 'arrow-right' %}
+            </a>
+            {% endif %}
+        </div>
+
+        {% if programs %}
+        <ul class="academics__grid">
+            {% for program in programs %}
+            <li class="program-card">
+                <span class="program-card__icon" aria-hidden="true">{% any_icon program.icon_class size=28 %}</span>
+                <h3 class="program-card__title">{{ program.title }}</h3>
+                {% if program.details %}<p class="program-card__text">{{ program.details }}</p>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</section>

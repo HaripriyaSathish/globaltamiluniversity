@@ -1,0 +1,137 @@
+/* =====================================================================
+   Academics – Figma: 1440 wide, padding 109.28 top/bottom
+   Background image + #E3F8FF 90% overlay
+   Container 1180 × 416, 2-column grid, 48px gap
+   Left column ≈ 398px, cards 3 × (233 × 199), 18px gaps
+   ===================================================================== */
+
+.academics {
+    position: relative;
+    isolation: isolate;
+    padding: 109.28px 0;
+    background-color: #E3F8FF;
+    background-image:
+        linear-gradient(rgba(227, 248, 255, 0.9), rgba(227, 248, 255, 0.9)),
+        var(--academics-bg, none);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.academics__container {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 398px minmax(0, 1fr);
+    column-gap: 48px;
+    align-items: start;
+}
+
+/* ---------- Left: intro ---------- */
+.academics__title {
+    max-width: 340px;                     /* breaks "Diverse / Programs for / a Brighter / Future" */
+    margin-top: 10px;
+    font-family: var(--font-heading);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 55px;
+    color: var(--navy-heading);
+}
+
+.academics__text {
+    margin-top: 16px;
+    font-family: var(--font-text);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 27px;
+    color: var(--text);
+}
+
+.academics__btn {
+    margin-top: 29px;
+    width: 218px;
+}
+
+/* ---------- Right: program cards ---------- */
+.academics__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.program-card {
+    min-height: 199px;
+    padding: 25px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(209, 225, 233, 0.8);
+    border-radius: 2px;
+    transition: border-color .3s ease, background-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+
+.program-card__icon {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    color: var(--navy);
+    font-size: 24px;                      /* when a Font Awesome icon is used */
+    transition: color .3s ease, transform .4s ease;
+}
+
+.program-card__icon .icon { width: 28px; height: 28px; }
+
+.program-card__title {
+    margin-top: 18px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--navy);
+}
+
+.program-card__text {
+    margin-top: 8px;
+    font-family: var(--font-text);
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--text);
+}
+
+/* Hover: yellow border + yellow icon (as in Figma) */
+.program-card:hover {
+    border-color: var(--yellow);
+    background: var(--white);
+    box-shadow: 0 12px 28px rgba(11, 56, 111, 0.08);
+    transform: translateY(-4px);
+}
+
+.program-card:hover .program-card__icon {
+    color: var(--yellow);
+    transform: scale(1.1);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1260px) {
+    .academics__container { padding-inline: 32px; grid-template-columns: 340px minmax(0, 1fr); column-gap: 32px; }
+    .academics__title { font-size: 44px; line-height: 48px; }
+}
+
+@media (max-width: 992px) {
+    .academics { padding: 80px 0; }
+    .academics__container { grid-template-columns: 1fr; row-gap: 40px; padding-inline: 24px; }
+    .academics__title { max-width: 520px; }
+    .academics__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 576px) {
+    .academics { padding: 56px 0; }
+    .academics__container { padding-inline: 16px; }
+    .academics__title { font-size: 34px; line-height: 40px; }
+    .academics__grid { grid-template-columns: 1fr; gap: 14px; }
+    .program-card { min-height: 0; }
+}

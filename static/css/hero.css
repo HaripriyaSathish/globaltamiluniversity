@@ -1,0 +1,148 @@
+/* =====================================================================
+   Hero – Figma: 1440 × 610, top 117
+   Image with linear gradient #E4F9FF (98% → 90% → 0%) from the left
+   ===================================================================== */
+
+.hero {
+    /* gradient over the photo (changed per screen size below) */
+    --hero-overlay: linear-gradient(90deg,
+        rgba(228, 249, 255, 0.98) 0%,
+        rgba(228, 249, 255, 0.90) 38%,
+        rgba(228, 249, 255, 0) 62%);
+
+    position: relative;
+    isolation: isolate;
+    min-height: 610px;
+    display: flex;
+    align-items: center;
+    background-color: var(--ice);
+    overflow: hidden;
+}
+
+/* Layer 1: the photo – slow zoom in / zoom out (Ken Burns) */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image: var(--hero-bg, linear-gradient(120deg, #cfeefa 0%, #f3fcff 100%));
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    transform-origin: 70% 50%;
+    will-change: transform;
+    animation: hero-zoom 20s ease-in-out infinite alternate;
+}
+
+/* Layer 2: the light-blue fade from the left (stays still) */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--hero-overlay);
+    pointer-events: none;
+}
+
+@keyframes hero-zoom {
+    from { transform: scale(1); }
+    to   { transform: scale(1.12); }
+}
+
+.hero__inner {
+    padding: 80px 94px;
+}
+
+.hero__content {
+    max-width: 580px;
+}
+
+/* TRADITION | KNOWLEDGE | TOMORROW */
+.hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 18px;
+    letter-spacing: 2px;
+    color: var(--navy);
+    text-transform: uppercase;
+}
+
+.hero__tags-sep {
+    color: var(--yellow);
+    letter-spacing: 0;
+    font-weight: 700;
+}
+
+.hero__title {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-heading);
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 68px;
+}
+
+.hero__title-main { color: var(--navy-heading); }
+.hero__title-highlight { color: var(--yellow); }
+
+.hero__subtitle {
+    margin-top: 21px;
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--navy);
+}
+
+.hero__text {
+    max-width: 460px;
+    margin-top: 13px;
+    font-family: var(--font-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 28px;
+    color: var(--text);
+}
+
+.hero__btn {
+    margin-top: 28px;
+    width: 218px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px) {
+    .hero__inner { padding-inline: 48px; }
+}
+
+@media (max-width: 992px) {
+    .hero {
+        min-height: 540px;
+        --hero-overlay: linear-gradient(90deg,
+            rgba(228, 249, 255, 0.98) 0%,
+            rgba(228, 249, 255, 0.92) 55%,
+            rgba(228, 249, 255, 0.35) 100%);
+    }
+    .hero__title { font-size: 60px; line-height: 56px; }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        min-height: auto;
+        --hero-overlay: linear-gradient(180deg,
+            rgba(228, 249, 255, 0.96) 0%,
+            rgba(228, 249, 255, 0.90) 100%);
+    }
+    .hero::before { background-position: 70% center; }
+    .hero__inner { padding: 56px 16px 64px; }
+    .hero__tags { gap: 8px; font-size: 11px; letter-spacing: 2.5px; }
+    .hero__title { font-size: 44px; line-height: 44px; letter-spacing: -1px; }
+    .hero__subtitle { margin-top: 18px; font-size: 18px; line-height: 26px; }
+    .hero__text { font-size: 14px; line-height: 26px; }
+    .hero__btn { width: 100%; max-width: 260px; }
+}
