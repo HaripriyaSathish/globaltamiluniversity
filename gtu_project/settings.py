@@ -33,8 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',            # must be above staticfiles
     'django.contrib.staticfiles',
+    'cloudinary_storage',            # after staticfiles: Cloudinary is used for media only
     'cloudinary',
     'website',
 ]
@@ -134,16 +134,17 @@ CLOUDINARY_STORAGE = {
 
 STORAGES = {
     'default': {
-        # Cloudinary storage that auto-resizes/compresses photos over 2 MB
         'BACKEND': 'website.storage.OptimizedMediaCloudinaryStorage',
     },
     'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
     },
 }
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
 # django-cloudinary-storage still looks for this old setting name
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 
 # ---------------- Email (Gmail SMTP) ----------------
