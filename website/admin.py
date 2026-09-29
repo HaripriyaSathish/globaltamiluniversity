@@ -13,7 +13,7 @@ from .models import (
     AdmissionsSection, OpeningsSection, CourseOpening,
     ResearchSection, ResearchAreasSection, ResearchTag, ResearchFocus,
     CampusSection, CampusFacility, GallerySection, GalleryCategory, GalleryImage,
-    ApplySection, ApplyPoint, Application, ContactSection, ContactSubject, ContactMessage,
+    ApplySection, ApplyPoint, Application, FaqSection, FaqItem, ContactSection, ContactSubject, ContactMessage,
     CtaSection, Footer, QuickLink, ProgramLink, LegalLink, SocialLink,
 )
 
@@ -443,6 +443,25 @@ class ApplicationAdmin(SubmissionAdmin):
     )
     actions = [export_as_csv(['created_at', 'full_name', 'email', 'phone', 'program_name', 'qualification',
                               'year_of_passing', 'goals', 'status', 'notes'])]
+
+
+# =====================================================================
+# FAQ
+# =====================================================================
+
+class FaqItemInline(admin.StackedInline):
+    model = FaqItem
+    extra = 0
+    fields = (('order', 'is_active'), 'question', 'answer')
+
+
+@admin.register(FaqSection)
+class FaqSectionAdmin(SingletonAdmin):
+    fieldsets = (
+        ("Heading", {'fields': ('eyebrow', 'title', 'description')}),
+        ("Visibility", {'fields': ('is_active',)}),
+    )
+    inlines = [FaqItemInline]
 
 
 # =====================================================================

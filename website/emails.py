@@ -3,8 +3,12 @@ Email notifications for form submissions.
 
 A failed email never loses a submission: the record is saved first and
 email errors are only logged.
+
+Emails are sent in a background thread so the visitor gets the
+"Thank you" reply at once instead of waiting for the mail server.
 """
 import logging
+import threading
 
 from django.conf import settings
 from django.core.mail import EmailMessage
@@ -12,15 +16,20 @@ from django.core.mail import EmailMessage
 logger = logging.getLogger(__name__)
 
 
+def _deliver(message):
+    try:
+        message.send()
+    except Exception:
+        logger.exception("Could not send email %r to %s", message.subject, message.to)
+
+
 def _send(subject, body, recipients, reply_to=None):
     recipients = [r for r in recipients if r]
     if not recipients:
         return
-    try:
-        EmailMessage(subject, body, settings.DEFAULT_FROM_EMAIL, recipients,
-                     reply_to=[reply_to] if reply_to else None).send()
-    except Exception:
-        logger.exception("Could not send email %r to %s", subject, recipients)
+    message = EmailMessage(subject, body, settings.DEFAULT_FROM_EMAIL, recipients,
+                           reply_to=[reply_to] if reply_to else None)
+    threading.Thread(target=_deliver, args=(message,), daemon=True).start()
 
 
 def notify_new_application(application, section, site):

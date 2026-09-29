@@ -681,6 +681,37 @@ class Application(TimeStampedModel):
 
 
 # =====================================================================
+# FAQ section ("Frequently Asked Questions") – shown before Contact
+# =====================================================================
+
+class FaqSection(SingletonModel):
+    eyebrow = models.CharField("Small heading", max_length=100, blank=True, help_text='e.g. "FAQ"')
+    title = models.TextField(max_length=200, help_text="Press Enter to start a new line.")
+    description = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = "FAQ Section"
+        verbose_name_plural = "FAQ Section"
+
+    def __str__(self):
+        return "FAQ Section"
+
+
+class FaqItem(OrderedItem):
+    """One question + answer. Also added to Google's FAQ structured data."""
+    section = models.ForeignKey(FaqSection, on_delete=models.CASCADE, related_name='questions')
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+
+    class Meta(OrderedItem.Meta):
+        verbose_name = "Question"
+
+    def __str__(self):
+        return self.question
+
+
+# =====================================================================
 # Contact section ("Contact Us") + submitted messages
 # =====================================================================
 

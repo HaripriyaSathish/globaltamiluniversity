@@ -15,7 +15,7 @@ from website.models import (
     SiteSettings, Navbar, HeroSection, FloatingButton, AboutSection, AcademicsSection,
     AdmissionsSection, OpeningsSection, CourseOpening,
     ResearchSection, ResearchAreasSection, CampusSection, GallerySection, GalleryImage,
-    ApplySection, ContactSection,
+    ApplySection, FaqSection, ContactSection,
     CtaSection, Footer, QuickLink, ProgramLink, LegalLink, SocialLink,
 )
 
@@ -25,10 +25,10 @@ from website.models import (
 # =====================================================================
 
 SITE_SETTINGS = {
-    'meta_title': "Global Tamil University",
+    'meta_title': "Global Tamil University, Coimbatore | Courses & Admissions",
     'meta_description': (
-        "Global Tamil University, Coimbatore – Rooted in Tamil Heritage, Shaping Global Futures. "
-        "A premier institution dedicated to academic excellence, research and innovation."
+        "Global Tamil University in Coimbatore offers B.A. Tamil Literature, B.Sc. Computer Science, "
+        "B.Com, B.Ed, M.A. Tamil Studies and Ph.D. research programmes. Explore courses and admissions."
     ),
     'meta_keywords': "Global Tamil University, Coimbatore university, Tamil university, admissions, research",
     'university_name': "GLOBAL TAMIL UNIVERSITY",
@@ -59,10 +59,10 @@ NAV_ITEMS = [
 HERO = {
     'title_line_1': "Global Tamil",
     'title_highlight': "University",
-    'subtitle': "Rooted in Tamil Heritage, Shaping Global Futures",
+    'subtitle': "Rooted in Heritage. Ready for Tomorrow.",
     'description': (
-        "A premier institution dedicated to academic excellence, research and "
-        "innovation, nurturing future leaders for a better world."
+        "A university in Coimbatore connecting Tamil heritage, modern education, "
+        "research and future-ready learning."
     ),
     'button_text': "Explore Our University",
     'button_link': "#about",
@@ -172,10 +172,10 @@ RESEARCH = {
         "same conversation."
     ),
     'highlight_label': "RESEARCH HIGHLIGHT",
-    'highlight_title': "Keeping Tamil knowledge alive in the digital age",
+    'highlight_title': "Preserving Knowledge. Creating New Possibilities.",
     'highlight_description': (
-        "Manuscript studies and digital humanities bring historical sources into "
-        "conversation with modern methods of preservation and discovery."
+        "Research in manuscripts, digital archives and Tamil studies brings historical "
+        "knowledge into conversation with contemporary methods of preservation and discovery."
     ),
     'highlight_image_alt': "Researchers studying Tamil palm-leaf manuscripts on screen in the library",
     'side_label': "FACULTY RESEARCH",
@@ -190,15 +190,15 @@ RESEARCH = {
 
 RESEARCH_AREAS = {
     'eyebrow': "RESEARCH AREAS",
-    'title': "Questions Worth Exploring",
+    'title': "Explore Tamil Research & PhD Programmes",
     'description': (
-        "From classical texts to contemporary communities, our areas of inquiry "
-        "cross disciplinary boundaries."
+        "Research at Global Tamil University connects Tamil scholarship with interdisciplinary "
+        "approaches to language, culture, education, society and technology."
     ),
     'is_active': True,
 }
 
-RESEARCH_TAGS = ["Tamil literature", "Linguistics", "Digital humanities", "Education", "Social sciences"]
+RESEARCH_TAGS = ["Tamil Literature", "Linguistics", "Digital Humanities", "Education", "Social Sciences"]
 
 # (label, title, description)
 RESEARCH_FOCUS = [
@@ -316,6 +316,31 @@ APPLY_POINTS = [
     "Applications reviewed by our admissions team",
     "Guidance on programs and eligibility",
     "Simple and secure application process",
+]
+
+FAQ = {
+    'eyebrow': "FAQ",
+    'title': "Frequently Asked Questions",
+    'is_active': True,
+}
+
+# (question, answer)
+FAQ_QUESTIONS = [
+    ("What programmes does Global Tamil University offer?",
+     "Global Tamil University offers B.A. Tamil Literature, B.Sc. Computer Science, M.A. Tamil Studies, "
+     "B.Com Commerce, B.Ed Education and Ph.D. Research Programmes."),
+    ("Where is Global Tamil University located?",
+     "Global Tamil University is located in Saravanampatti, Coimbatore."),
+    ("How can I apply for admission?",
+     "Choose your programme, review the eligibility requirements and submit the application form. "
+     "The admissions team will contact you with the next steps."),
+    ("What are the eligibility requirements for the programmes?",
+     "B.A. Tamil Literature, B.Sc. Computer Science and B.Com Commerce require Higher Secondary (10+2). "
+     "M.A. Tamil Studies and B.Ed Education require a bachelor’s degree. "
+     "Ph.D. Research Programmes require a relevant master’s degree."),
+    ("Does Global Tamil University offer Ph.D. research programmes?",
+     "Yes. The university lists Ph.D. Research Programmes with research areas including Tamil, "
+     "Linguistics and Social Sciences."),
 ]
 
 CONTACT = {
@@ -479,6 +504,11 @@ class Command(BaseCommand):
 
         apply = self.seed_singleton(ApplySection, APPLY)
         self.seed_items(apply.points, [{'text': t} for t in APPLY_POINTS], key='text')
+
+        faq = self.seed_singleton(FaqSection, FAQ)
+        self.seed_items(faq.questions, [
+            {'question': question, 'answer': answer} for question, answer in FAQ_QUESTIONS
+        ], key='question')
 
         contact = self.seed_singleton(ContactSection, CONTACT)
         self.seed_items(contact.subjects, [{'name': n} for n in CONTACT_SUBJECTS], key='name')

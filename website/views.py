@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
@@ -7,9 +9,25 @@ from .emails import notify_new_application, notify_new_contact_message
 from .forms import ApplicationForm, ContactForm
 from .models import (
     SiteSettings, HeroSection, AboutSection, AcademicsSection, AdmissionsSection, OpeningsSection,
-    ResearchSection, ResearchAreasSection, CampusSection, GallerySection, ApplySection, ContactSection,
-    CtaSection,
+    ResearchSection, ResearchAreasSection, CampusSection, GallerySection, ApplySection, FaqSection,
+    ContactSection, CtaSection,
 )
+
+
+def _faq_schema(questions):
+    """schema.org FAQPage JSON-LD so Google can show the questions in search results."""
+    data = {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+            {'@type': 'Question', 'name': q.question,
+             'acceptedAnswer': {'@type': 'Answer', 'text': q.answer}}
+            for q in questions
+        ],
+    }
+    # escape <, >, & so text can never close the <script> tag
+    return (json.dumps(data, ensure_ascii=False)
+            .replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026'))
 
 
 def home(request, apply_form=None, contact_form=None):
@@ -24,6 +42,8 @@ def home(request, apply_form=None, contact_form=None):
     gallery = GallerySection.load()
     gallery_images = gallery.images.filter(is_active=True).select_related('category')
     apply = ApplySection.load()
+    faq = FaqSection.load()
+    faq_questions = list(faq.questions.filter(is_active=True))
     contact = ContactSection.load()
     cta = CtaSection.load()
 
@@ -60,6 +80,10 @@ def home(request, apply_form=None, contact_form=None):
         'apply': apply if apply.is_active else None,
         'apply_points': apply.points.filter(is_active=True),
         'apply_form': apply_form or ApplicationForm(section=apply, auto_id='apply_%s'),
+
+        'faq': faq if faq.is_active and faq_questions else None,
+        'faq_questions': faq_questions,
+        'faq_schema': _faq_schema(faq_questions) if faq.is_active and faq_questions else '',
 
         'contact': contact if contact.is_active else None,
         'contact_form': contact_form or ContactForm(section=contact, auto_id='contact_%s'),

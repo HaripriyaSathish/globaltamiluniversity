@@ -1,0 +1,25 @@
+{% load ui %}
+<section class="faq" id="faq">
+    <div class="faq__container">
+        <div class="faq__intro">
+            {% if faq.eyebrow %}<p class="eyebrow">{{ faq.eyebrow }}</p>{% endif %}
+            <h2 class="faq__title">{{ faq.title|linebreaksbr }}</h2>
+            {% if faq.description %}<p class="faq__text">{{ faq.description }}</p>{% endif %}
+        </div>
+
+        {# <details> works without JavaScript and keeps every answer in the page for search engines #}
+        <div class="faq__list">
+            {% for item in faq_questions %}
+            <details class="faq__item"{% if forloop.first %} open{% endif %}>
+                <summary class="faq__question">
+                    <h3>{{ item.question }}</h3>
+                    {% icon 'chevron-down' size=20 cls='faq__chevron' %}
+                </summary>
+                <p class="faq__answer">{{ item.answer|linebreaksbr }}</p>
+            </details>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script type="application/ld+json">{{ faq_schema|safe }}</script>
